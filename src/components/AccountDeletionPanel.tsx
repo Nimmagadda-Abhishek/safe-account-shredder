@@ -36,7 +36,6 @@ export default function AccountDeletionPanel({
   const [selectedReason, setSelectedReason] = useState<string>("");
   const [otherReason, setOtherReason] = useState<string>("");
   const [emailConfirmation, setEmailConfirmation] = useState<string>("");
-  const [requestExport, setRequestExport] = useState<boolean>(false);
   const [showConfirmModal, setShowConfirmModal] = useState<boolean>(false);
   const [deleteConfirmation, setDeleteConfirmation] = useState<string>("");
   const [isDeleting, setIsDeleting] = useState<boolean>(false);
@@ -105,26 +104,6 @@ export default function AccountDeletionPanel({
             </CardDescription>
           </CardHeader>
           <CardContent className="space-y-6">
-            {requestExport && (
-              <div
-                className="p-4 rounded-lg bg-accent border border-border"
-                role="status"
-                aria-live="polite"
-              >
-                <div className="flex items-start gap-3">
-                  <Mail className="w-5 h-5 text-primary mt-0.5" aria-hidden="true" />
-                  <div className="flex-1">
-                    <h3 className="font-medium text-sm text-foreground mb-1">
-                      Data Export Requested
-                    </h3>
-                    <p className="text-sm text-muted-foreground">
-                      We'll send your data export to <strong>{userEmail}</strong> within 24 hours.
-                    </p>
-                  </div>
-                </div>
-              </div>
-            )}
-
             <div className="border border-border rounded-lg p-6 bg-card">
               <h3 className="font-semibold mb-4 text-foreground">Confirmation Email Preview</h3>
               <div className="space-y-3 text-sm">
@@ -180,7 +159,7 @@ export default function AccountDeletionPanel({
             <img
               src={logoUrl}
               alt="Company logo"
-              className="h-8 w-auto"
+              className="h-16 w-auto"
             />
           </div>
           <CardTitle className="text-2xl flex items-center gap-2">
@@ -298,27 +277,6 @@ export default function AccountDeletionPanel({
             )}
           </div>
 
-          {/* Request export */}
-          <div className="flex items-start gap-3 p-4 rounded-lg bg-accent border border-border">
-            <Checkbox
-              id="export-data"
-              checked={requestExport}
-              onCheckedChange={(checked) => setRequestExport(checked === true)}
-              aria-label="Request data export before deletion"
-            />
-            <div className="space-y-1 flex-1">
-              <Label
-                htmlFor="export-data"
-                className="text-sm font-medium cursor-pointer"
-              >
-                Request data export
-              </Label>
-              <p className="text-sm text-muted-foreground">
-                We'll email you a copy of your data before deletion
-              </p>
-            </div>
-          </div>
-
           {/* Delete button */}
           <Button
             variant="destructive"
@@ -357,7 +315,6 @@ export default function AccountDeletionPanel({
               <ul className="text-sm text-muted-foreground space-y-1 ml-4" role="list">
                 <li>• Account: {userEmail}</li>
                 <li>• Reason: {selectedReason}</li>
-                {requestExport && <li>• Data export will be sent</li>}
               </ul>
             </div>
 
